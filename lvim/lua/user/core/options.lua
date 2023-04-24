@@ -1,6 +1,7 @@
 local opt = vim.opt -- for conciseness
 
 
+lvim.format_on_save = true
 -- Numbers
 --
 opt.relativenumber = true
