@@ -1,6 +1,4 @@
 -- LUNAR VIM
--- IMPORTS
-require("user.core.options")
 -- general
 lvim.log.level = "warn"
 -- lvim.colorscheme = "lunar"
@@ -286,3 +284,6 @@ formatters.setup {
 --
 -- MODULES
 
+-- require("user.languages.web")
+
+require("user.core.options")
