@@ -30,6 +30,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 alias vi='lvim'
+alias vim='lvim'
+
 
 alias gw='git switch'
 alias python='python3'
@@ -134,6 +136,7 @@ export PATH="$PNPM_HOME:$PATH"
 
 
 # LVIM
+export EDITOR='lvim'
 export PATH=$PATH:$HOME/.local/bin
 
 

@@ -16,6 +16,12 @@ lvim.plugins = {
     "mrjones2014/nvim-ts-rainbow",
   },
   {
+    "christoomey/vim-tmux-navigator"
+  },
+  {
+    "szw/vim-maximizer"
+  },
+  {
     "rmagatti/goto-preview",
     config = function()
       require('goto-preview').setup {
@@ -79,4 +85,3 @@ lvim.plugins = {
   },
 
 }
-

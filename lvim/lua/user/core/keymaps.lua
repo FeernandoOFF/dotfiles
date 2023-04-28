@@ -25,3 +25,6 @@ lvimKeys.normal_mode["<leader>sv"] = "<C-w>v"
 lvimKeys.normal_mode["<leader>sh"] = "<C-w>s"
 lvimKeys.normal_mode["<leader>se"] = "<C-w>="
 lvimKeys.normal_mode["<leader>sx"] = ":lose<CR>"
+
+--- Terminal
+lvimKeys.normal_mode["<D-3>"] = "<M-3>"
