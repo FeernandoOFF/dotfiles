@@ -29,9 +29,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Aliases
 
 
-alias vi='lvim'
-alias vim='lvim'
-
 
 alias gw='git switch'
 alias python='python3'
@@ -152,13 +149,14 @@ export JAVA_HOME="/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 
-export ANDROID_HOME=/Users/fernandooff/Library/Android/sdk
+export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/emulator
 
 
+export NDK_HOME="$ANDROID_HOME/ndk/25.2.9519653"
 
 
 # asdf
@@ -166,3 +164,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

@@ -1,3 +1,5 @@
+# FOCUS WINDOWS
+#
 # change window focus within space
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
@@ -5,26 +7,48 @@ alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
 
 #change focus between external displays (left and right)
-alt - w: yabai -m display --focus north
-alt - s: yabai -m display --focus south
+shift + ctrl + cmd - s: yabai -m display --focus south
+shift + ctrl + cmd - w: yabai -m display --focus north
 
-# rotate layout clockwise
-shift + alt - r : yabai -m space --rotate 270
 
-# flip along y-axis
-shift + alt - y : yabai -m space --mirror y-axis
-
-# flip along x-axis
-shift + alt - x : yabai -m space --mirror x-axis
+# maximize a window
+shift + ctrl + cmd - m : yabai -m window --toggle zoom-fullscreen
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+shift + ctrl + cmd - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+
+
+# MOVE WINDOWS
+
+
+# Move to spaces
+shift + ctrl + cmd + alt - 1 : yabai -m window --space 1;
+shift + ctrl + cmd + alt - 2 : yabai -m window --space 2;
+shift + ctrl + cmd + alt - 3 : yabai -m window --space 3;
+shift + ctrl + cmd + alt - 4 : yabai -m window --space 4;
+shift + ctrl + cmd + alt - 5 : yabai -m window --space 5;
+shift + ctrl + cmd + alt - 6 : yabai -m window --space 6;
+
+# move window to display top and bottom
+shift + ctrl + cmd + alt - w : yabai -m window --display north; yabai -m display --focus west;
+shift + ctrl + cmd + alt - s : yabai -m window --display south; yabai -m display --focus east;
+
+# rotate layout clockwise
+shift + ctrl + cmd + alt - r : yabai -m space --rotate 270
+
+# flip along y-axis
+shift + ctrl + cmd + alt - y : yabai -m space --mirror y-axis
+
+# flip along x-axis
+shift + ctrl + cmd + alt - x : yabai -m space --mirror x-axis
+
 
 # swap windows
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west
-shift + alt - l : yabai -m window --swap east
+shift + ctrl + cmd + alt - j : yabai -m window --swap south
+shift + ctrl + cmd + alt - k : yabai -m window --swap north
+shift + ctrl + cmd + alt - h : yabai -m window --swap west
+shift + ctrl + cmd + alt - l : yabai -m window --swap east
 
 # move window and split
 ctrl + alt - j : yabai -m window --warp south
@@ -32,24 +56,16 @@ ctrl + alt - k : yabai -m window --warp north
 ctrl + alt - h : yabai -m window --warp west
 ctrl + alt - l : yabai -m window --warp east
 
-# move window to display top and bottom
-shift + alt - w : yabai -m window --display north; yabai -m display --focus west;
-shift + alt - s : yabai -m window --display south; yabai -m display --focus east;
 
 #move window to prev and next space
 shift + alt - p : yabai -m window --space prev;
 shift + alt - n : yabai -m window --space next;
 
-# maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
 
-# balance out tree of windows (resize to occupy same area)
-shift + alt - e : yabai -m space --balance# move window to space #
-shift + alt - 1 : yabai -m window --space 1;
-shift + alt - 2 : yabai -m window --space 2;
-shift + alt - 3 : yabai -m window --space 3;
-shift + alt - 4 : yabai -m window --space 4;
-shift + alt - 5 : yabai -m window --space 5;
-shift + alt - 6 : yabai -m window --space 6;
-shift + alt - 7 : yabai -m window --space 7;
+
+# stop/start/restart yabai
+#
+shift + ctrl + cmd - p : brew services stop yabai
+shift + ctrl + cmd - o : brew services start yabai
+
 
