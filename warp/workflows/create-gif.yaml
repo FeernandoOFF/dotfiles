@@ -1,0 +1,13 @@
+name: Create Gif
+command: ffmpeg -i {{inputFile}} -vf scale={{resolution}}:-1 -pix_fmt rgb24 -r 15 {{outputfile}}
+arguments:
+  - name: inputFile 
+    description: The name of your file .mov file
+  - name: resolution 
+    description: The resolution of your gif
+    default_value: 720
+  - name: outputfile
+    description: The final name of your file
+    default_value: output.gif
+tags: ['ffmpeg','utility']
+

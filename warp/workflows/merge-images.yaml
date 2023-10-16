@@ -1,0 +1,21 @@
+name: Ticket  Merge images
+
+arguments: 
+ - name: image1
+   description: first image
+ - name: image2
+   description: second image
+
+tags: ['Image Magick','Tapadoo','utility','work']
+
+
+
+name: Merge images
+command: convert {{inputFile}} -gravity north -pointsize 72 -fill red -annotate +0+10 "old" image1_annotated.jpg convert {{inputFile2}} -gravity north -pointsize 72 -fill red -annotate +0+10 "new" image2_annotated.jpg convert +append image1_annotated.jpg image2_annotated.jpg -resize 60% output.jpg
+arguments:
+  - name: inputFile 
+    description: The name of your file .mov file
+  - name: inputFile2
+    description: The name of your file .mov file
+tags: ['ffmpeg','utility']
+
