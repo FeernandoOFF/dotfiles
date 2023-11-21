@@ -132,9 +132,6 @@ export PATH="$PNPM_HOME:$PATH"
 
 
 
-# LVIM
-export EDITOR='lvim'
-export PATH=$PATH:$HOME/.local/bin
 
 
 
@@ -145,7 +142,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Android
 
 
-export JAVA_HOME="/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 
