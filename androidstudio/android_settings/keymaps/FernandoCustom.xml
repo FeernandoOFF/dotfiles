@@ -1,0 +1,81 @@
+<keymap version="1" name="FernandoCustom" parent="VSCode OSX">
+  <action id="ActivateCommitToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta l" />
+  </action>
+  <action id="ActivateDebugToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta d" />
+  </action>
+  <action id="ActivateLogcatToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta b" />
+  </action>
+  <action id="ActivateProjectToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta r" />
+  </action>
+  <action id="ActivateTerminalToolWindow">
+    <keyboard-shortcut first-keystroke="meta back_quote" />
+  </action>
+  <action id="Adtui.ZoomToActualAction">
+    <keyboard-shortcut first-keystroke="meta numpad0" />
+  </action>
+  <action id="Android.CleanRun" />
+  <action id="Build" />
+  <action id="BuildSolutionAction" />
+  <action id="CollapseAllRegions">
+    <keyboard-shortcut first-keystroke="meta k" second-keystroke="meta 0" />
+    <keyboard-shortcut first-keystroke="shift meta comma" />
+  </action>
+  <action id="CollapseSelection" />
+  <action id="CompileDirty" />
+  <action id="EditorDuplicate">
+    <keyboard-shortcut first-keystroke="ctrl alt down" />
+  </action>
+  <action id="EditorScrollToCenter" />
+  <action id="ExpandAllRegions">
+    <keyboard-shortcut first-keystroke="meta k" second-keystroke="meta j" />
+    <keyboard-shortcut first-keystroke="shift meta period" />
+  </action>
+  <action id="ExpandCollapseToggleAction">
+    <keyboard-shortcut first-keystroke="meta period" />
+  </action>
+  <action id="GotoNextElementUnderCaretUsage" />
+  <action id="NextProjectWindow" />
+  <action id="NextSplitter">
+    <keyboard-shortcut first-keystroke="ctrl l" />
+  </action>
+  <action id="NextWindow" />
+  <action id="PrevSplitter">
+    <keyboard-shortcut first-keystroke="ctrl h" />
+  </action>
+  <action id="ProblemsView.QuickFixes">
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
+  <action id="Refresh" />
+  <action id="ResizeToolWindowDown" />
+  <action id="Run">
+    <keyboard-shortcut first-keystroke="meta r" />
+  </action>
+  <action id="SelectAllOccurrences">
+    <keyboard-shortcut first-keystroke="meta f2" />
+    <keyboard-shortcut first-keystroke="ctrl meta g" />
+  </action>
+  <action id="SelectInProjectView">
+    <keyboard-shortcut first-keystroke="shift meta e" />
+  </action>
+  <action id="ShowIntentionActions">
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
+  <action id="SplitVertically">
+    <keyboard-shortcut first-keystroke="ctrl w" />
+  </action>
+  <action id="TypeHierarchy" />
+  <action id="TypeHierarchyBase.BaseOnThisType" />
+  <action id="UsageFiltering.WriteAccess" />
+  <action id="android.deploy.ApplyChanges">
+    <keyboard-shortcut first-keystroke="ctrl meta e" />
+  </action>
+  <action id="android.deploy.CodeSwap">
+    <keyboard-shortcut first-keystroke="shift ctrl meta e" />
+  </action>
+  <action id="android.device.back.button" />
+  <action id="android.device.rotate.right" />
+</keymap>
