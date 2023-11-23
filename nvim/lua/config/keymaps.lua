@@ -12,3 +12,5 @@ local lazyterm = function()
 end
 
 vim.keymap.set("n", "<leader>`", lazyterm, { desc = "Terminal (root dir)" })
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { silent = true })
