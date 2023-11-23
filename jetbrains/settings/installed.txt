@@ -1,8 +1,0 @@
-com.myoutdesk.tailwind_formatter
-AceJump
-IdeaVIM
-org.jetbrains.IdeaVim-EasyMotion
-ru.adelf.idea.dotenv
-org.jetbrains.plugins.astro
-com.chrisrm.idea.MaterialThemeUI
-dev.blachut.svelte.lang
