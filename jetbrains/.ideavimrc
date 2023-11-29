@@ -52,10 +52,13 @@ map mx <A-x>
 map mp <A-p>
 
 "" Bookmarks
-nnoremap <Space>b :action ShowBookmarks<CR>
+nnoremap <leader>b :action ShowBookmarks<CR>
 nnoremap mb :action ToggleBookmark<CR>
 
 
+"" Acejump
+
+nnoremap <leader>s :action AceAction<CR>
 
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
