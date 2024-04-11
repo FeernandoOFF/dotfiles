@@ -1,0 +1,58 @@
+     '(
+                {
+            id = "com.proxyman.NSProxy";
+            "window-titles" =             (
+                "Map Local"
+            );
+        },
+                {
+            id = "com.jetbrains.WebStorm";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.seriflabs.affinitydesigner2";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.apple.dt.Xcode";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.apple.Safari";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "dev.warp.Warp-Stable";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.seriflabs.affinityphoto2";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.anytype.anytype";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "company.thebrowser.Browser";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "com.google.android.studio";
+            "window-titles" =             (
+            );
+        },
+                {
+            id = "dev.warp.Warp-Stable";
+            "window-titles" =             (
+            );
+        }
+    )'

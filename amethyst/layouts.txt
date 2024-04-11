@@ -1,0 +1,6 @@
+'(
+        fullscreen,
+        column,
+        bsp,
+        floating
+    )'
