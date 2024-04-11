@@ -34,6 +34,12 @@ alias gw='git switch'
 alias python='python3'
 alias r='ranger'
 alias vi='nvim'
+alias l='eza -l'
+
+
+bindkey -e
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -175,6 +181,9 @@ export PATH=$PATH:$HOME/.maestro/bin
 
 # bun completions
 [ -s "/Users/fernandooff/.bun/_bun" ] && source "/Users/fernandooff/.bun/_bun"
+
+
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 # =============================================================================
 #
