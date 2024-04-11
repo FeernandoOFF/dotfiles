@@ -1,4 +1,5 @@
 return {
+  { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.typescript" },
 
   -- add more treesitter parsers
@@ -6,18 +7,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "bash",
         "html",
+        "css",
         "javascript",
+        "tsx",
+        "typescript",
         "json",
         "lua",
+        "bash",
         "markdown",
         "markdown_inline",
         "python",
         "query",
         "regex",
-        "tsx",
-        "typescript",
         "vim",
         "yaml",
         "astro",

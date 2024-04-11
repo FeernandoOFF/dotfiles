@@ -19,4 +19,15 @@ return {
       end,
     },
   },
+  {
+    "sanathks/workspace.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("workspace").setup({
+        workspaces = {
+          { name = "Tapadoo", path = "~/development/tapadoo/", keymap = { "<leader>spt" } },
+        },
+      })
+    end,
+  },
 }
