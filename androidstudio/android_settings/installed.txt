@@ -1,5 +1,0 @@
-com.intellij.marketplace
-Key Promoter X
-com.intellij.plugins.vscodekeymap
-IdeaVIM
-com.chrisrm.idea.MaterialThemeUI

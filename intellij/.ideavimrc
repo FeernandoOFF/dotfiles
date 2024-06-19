@@ -3,7 +3,7 @@
 source ~/.vimrc
 let mapleader = " " " map leader to Space
 
-set idearefactormode=keep
+
 """ Plugins ----
 set NERDTree
 set easymotion
