@@ -8,7 +8,8 @@ alias python='python3'
 alias r='ranger'
 alias vi='nvim'
 alias l='eza -l'
-
+alias lz='lazygit'
+alias t='sesh connect $(sesh list | fzf)'
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -40,4 +41,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+if command -v z &>/dev/null; then
+    alias cd='z'
+fi
+
+
+
+# Android CLI
+
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
