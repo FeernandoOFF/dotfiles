@@ -1,0 +1,7 @@
+[default_session]
+startup_command = 'tmux split-pane -l 40 -h &&  tmux select-pane -t :.+ && tmux send-keys "nvim" Enter'
+
+[[session]]
+name = "Dotfiles 📂"
+path = "~/dotfiles"
+startup_command = "ls"
