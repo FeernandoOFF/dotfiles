@@ -59,8 +59,10 @@ fi
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-
+# JAVA
+export JAVA_HOME=/Users/$USER/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
 
 # Wasmer
 export WASMER_DIR="/Users/fernandoobregon/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
