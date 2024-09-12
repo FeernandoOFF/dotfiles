@@ -2,6 +2,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Homebrew
+export PATH="$PATH:/opt/homebrew/bin"
+
 # Aliases 
 alias gw='git switch'
 alias python='python3'
@@ -57,3 +60,7 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
+
+# Wasmer
+export WASMER_DIR="/Users/fernandoobregon/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
