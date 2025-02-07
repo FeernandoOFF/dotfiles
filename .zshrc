@@ -7,8 +7,8 @@ export PATH="$PATH:/opt/homebrew/bin"
 
 # Aliases 
 alias gw='git switch'
-alias python='python3'
 alias r='ranger'
+alias python='python3'
 alias vi='nvim'
 alias l='eza -l'
 alias lz='lazygit'
@@ -58,7 +58,7 @@ fi
 
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 # JAVA
 export JAVA_HOME=/Users/$USER/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
 
