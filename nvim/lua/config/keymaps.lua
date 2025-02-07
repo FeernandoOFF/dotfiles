@@ -7,13 +7,6 @@ end
 vim.keymap.set("n", "<leader>`", lazyterm, { desc = "Terminal (root dir)" })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Terminal (root dir)" })
 
-vim.api.nvim_set_keymap("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-\\>", "<Cmd>NvimTmuxNavigateLastActive<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-Space>", "<Cmd>NvimTmuxNavigateNext<CR>", { silent = true })
-
 -- LSP actions
 vim.keymap.set("n", "gi", "<Cmd>Telescope lsp_references<CR>", { desc = "Go to usage" })
 vim.keymap.set("n", "cd", "<Cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })

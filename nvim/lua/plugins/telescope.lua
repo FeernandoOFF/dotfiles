@@ -29,5 +29,15 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        "<C-f>",
+        mode = { "n" },
+        function()
+          require("workspace").tmux_sessions()
+        end,
+        desc = "Explorer NeoTree Reveal Current file",
+      },
+    },
   },
 }

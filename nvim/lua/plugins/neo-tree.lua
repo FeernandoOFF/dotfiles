@@ -4,14 +4,7 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
-      {
-        "<leader>L",
-        mode = { "n" },
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
-        end,
-        desc = "Explorer NeoTree (root dir)",
-      },
+      { "<leader>E", "<cmd>Neotree reveal<cr>", desc = "Neotree reveal current fle" },
     },
     opts = {
       event_handlers = {
@@ -25,6 +18,17 @@ return {
       },
     },
     config = function()
+      require("neo-tree").setup({
+        filesystem = {
+          group_empty_dirs = true,
+        },
+        buffers = {
+          group_empty_dirs = true,
+        },
+      })
+
+      vim.g.nvim_tree_group_empty = 1
+
       require("neo-tree.command").execute({ action = "close" })
     end,
   },
