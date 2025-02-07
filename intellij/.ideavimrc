@@ -24,29 +24,30 @@ Plug 'machakann/vim-highlightedyank'
 map Q gq
 unmap <C-R>
 
-map <leader>f <Plug>(easymotion-s)
-map <leader>e <Plug>(easymotion-f)
 
-
-""" IDEA Vim Mappins ----
+""" IDEA Vim Mappings ----
 map <leader>r <Action>(RenameElement)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 
 map gb <Action>(Back)
 nmap gf <Action>(Forward)
+nmap gne <Action>(GotoNextError)
 
-nmap gL <Action>(QuickImplementations)
-nmap gi <Action>(ShowUsages)
-nmap gI <Action>(HighlightUsagesInFile)
-nmap gD <Action>(GotoTypeDeclaration)
+nmap gu <Action>(ShowUsages)
+nmap gi <Action>(GotoImplementation)
 nmap ge <Action>(ShowErrorDescription)
-nmap gh :action QuickJavaDoc<cr>
+nmap gc <Action>(CallHierarchy)
 
 
-nmap <leader>c <Action>(CallHierarchy)
 noremap <Leader><Leader> :action SearchEverywhere<CR>
+noremap <Leader>p :action GotoFile<CR>
+noremap <Leader>e :action RecentFiles<CR>
+noremap <Leader>E :action ActivateProjectToolWindow<CR>
+noremap <Leader>1 :action SelectInProjectView<CR>
+noremap <Leader>0 :action HideAllWindows<CR>
+noremap <Leader>g :action ActivateCommitToolWindow<CR>
 
-"" Multi cursours
+"" Multi cursors
 map mc <A-n>
 map mx <A-x>
 map mp <A-p>
@@ -56,8 +57,7 @@ nnoremap <leader>b :action ShowBookmarks<CR>
 nnoremap mb :action ToggleBookmark<CR>
 
 
-"" Acejump
-
+"" Ace jump
 nnoremap <leader>s :action AceAction<CR>
 
 
@@ -69,3 +69,11 @@ nnoremap <leader>s :action AceAction<CR>
 
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
+
+
+
+nmap <Tab> >>_
+nmap <S-Tab> <<_
+imap <S-Tab> <C-D>
+vmap <Tab> >gv
+vmap <S-Tab> <gv
