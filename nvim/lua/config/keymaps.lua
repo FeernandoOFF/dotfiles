@@ -31,3 +31,21 @@ vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { silent = true })
 -- Tmux workspaces
 -- local workspace = require("workspace")
 -- vim.keymap.set("n", "<C-f>", workspace.tmux_sessions)
+
+-- Jump lists
+
+vim.keymap.set("n", "gb", "<C-o>", { desc = "Jump to previous location in jumplist" })
+
+vim.keymap.set(
+  "n",
+  "j",
+  [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'j' : 'gj']],
+  { noremap = true, expr = true }
+)
+
+vim.keymap.set(
+  "n",
+  "k",
+  [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'k' : 'gk']],
+  { noremap = true, expr = true }
+)
