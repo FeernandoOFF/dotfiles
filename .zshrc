@@ -7,12 +7,12 @@ export PATH="$PATH:/opt/homebrew/bin"
 
 # Aliases 
 alias gw='git switch'
-alias r='ranger'
-alias python='python3'
-alias vi='nvim'
-alias l='eza -l'
 alias lz='lazygit'
+alias vi='nvim'
 alias t='sesh connect $(sesh list | fzf)'
+alias e='yazi'
+alias python='python3'
+alias l='eza -l'
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -52,6 +52,29 @@ if command -v z &>/dev/null; then
     alias cd='z'
 fi
 
+# eza
+if command -v eza &>/dev/null; then
+    alias l='eza -l'
+    alias ls='eza'
+fi
+
+# Sesh / TMUX
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '^F' sesh-sessions
+bindkey -M vicmd '^F' sesh-sessions
+bindkey -M viins '^F' sesh-sessions
 
 
 # Android CLI
@@ -59,8 +82,10 @@ fi
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
+
 # JAVA
 export JAVA_HOME=/Users/$USER/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
+
 
 # Wasmer
 export WASMER_DIR="/Users/fernandoobregon/.wasmer"
