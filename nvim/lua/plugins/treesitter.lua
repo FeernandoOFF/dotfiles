@@ -38,6 +38,8 @@ return {
         "tsx",
         "typescript",
         "astro",
+        "svelte",
+        "kotlin",
       })
     end,
   },
