@@ -1,8 +1,8 @@
 {
   "extras": [
-
+    "lazyvim.plugins.extras.ui.dashboard-nvim"
   ],
-  "install_version": 8,
+  "install_version": 7,
   "news": {
     "NEWS.md": "10960"
   },
