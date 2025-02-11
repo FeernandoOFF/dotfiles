@@ -7,6 +7,16 @@ end
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>2", lazyterm, { desc = "Terminal (root dir)" })
 
+vim.keymap.set("n", "<leader>p", function(command, opts)
+  LazyVim.pick.open(command, vim.deepcopy(opts))
+end, {
+  desc = "Command palette",
+})
+
+vim.keymap.set("n", "<leader>P", function()
+  Snacks.picker.keymaps()
+end, { desc = "Keymaps" })
+
 -- LSP actions
 -- vim.keymap.set("n", "gi", "<Cmd>Telescope lsp_references<CR>", { desc = "Go to usage" })
 -- vim.keymap.set("n", "cd", "<Cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })
