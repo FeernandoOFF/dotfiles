@@ -58,7 +58,7 @@ nnoremap mb :action ToggleBookmark<CR>
 
 
 "" Ace jump
-nnoremap <leader>s :action AceAction<CR>
+nnoremap s :action AceAction<CR>
 
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
