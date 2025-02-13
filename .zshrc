@@ -9,17 +9,26 @@ export PATH="$PATH:/opt/homebrew/bin"
 alias gw='git switch'
 alias lz='lazygit'
 alias vi='nvim'
+alias f='fzf --preview "cat {}"'
+alias fvi='vi $(fzf --preview "cat {}")'
 alias t='sesh connect $(sesh list | fzf)'
 alias e='yazi'
 alias python='python3'
 alias l='eza -l'
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 
 # Plugins
-plugins=(git)
+plugins=(
+  git
+  asdf
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  you-should-use
+  zsh-bat
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,3 +100,5 @@ export JAVA_HOME=/Users/$USER/Applications/Android\ Studio.app/Contents/jbr/Cont
 export WASMER_DIR="/Users/fernandoobregon/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
