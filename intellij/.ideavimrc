@@ -34,6 +34,7 @@ nmap gf <Action>(Forward)
 nmap gne <Action>(GotoNextError)
 
 nmap gu <Action>(ShowUsages)
+nmap gI <Action>(GotoSuperMethod)
 nmap gi <Action>(GotoImplementation)
 nmap ge <Action>(ShowErrorDescription)
 nmap gc <Action>(CallHierarchy)
