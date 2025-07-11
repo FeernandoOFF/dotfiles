@@ -41,6 +41,8 @@ nmap gI <Action>(HighlightUsagesInFile)
 nmap gD <Action>(GotoTypeDeclaration)
 nmap ge <Action>(ShowErrorDescription)
 nmap gh :action QuickJavaDoc<cr>
+nmap gne <Action>(GotoNextError)
+nmap gpe <Action>(GotoPreviousError)
 
 
 nmap <leader>c <Action>(CallHierarchy)
