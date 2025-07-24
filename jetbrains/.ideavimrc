@@ -36,8 +36,9 @@ map gb <Action>(Back)
 nmap gf <Action>(Forward)
 
 nmap gL <Action>(QuickImplementations)
-nmap gi <Action>(ShowUsages)
-nmap gI <Action>(HighlightUsagesInFile)
+nmap gu <Action>(GotoImplementation)
+nmap gi <Action>(GotoImplementation)
+nmap gI <Action>(GotoSuperMethod)
 nmap gD <Action>(GotoTypeDeclaration)
 nmap ge <Action>(ShowErrorDescription)
 nmap gh :action QuickJavaDoc<cr>
@@ -53,21 +54,33 @@ map mc <A-n>
 map mx <A-x>
 map mp <A-p>
 
+
+"" Movement
+
+nmap s <Action>(AceTargetAction)
+
 "" Bookmarks
 nnoremap <leader>b :action ShowBookmarks<CR>
 nnoremap mb :action ToggleBookmark<CR>
 
-
-"" Acejump
-
-nnoremap <leader>s :action AceAction<CR>
-
+"" Bookmarks (Harpooon)
+nmap <leader>h <Action>(ShowHarpoon)
+nmap <leader>1 <Action>(GotoHarpoon1)
+nmap <leader>2 <Action>(GotoHarpoon2)
+nmap <leader>3 <Action>(GotoHarpoon3)
+nmap <leader>4 <Action>(GotoHarpoon4)
+nmap <leader>5 <Action>(GotoHarpoon5)
+nmap h1 <Action>(SetHarpoon1)
+nmap h2 <Action>(SetHarpoon2)
+nmap h3 <Action>(SetHarpoon3)
+nmap h4 <Action>(SetHarpoon4)
+nmap h5 <Action>(SetHarpoon5)
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "map \r <Action>(ReformatCode)
 
 "" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
 
 "" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+map \b <Action>(ToggleLineBreakpoint)
+map \d <Action>(Debug)
