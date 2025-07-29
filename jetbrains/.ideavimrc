@@ -42,8 +42,15 @@ nmap gI <Action>(GotoSuperMethod)
 nmap gD <Action>(GotoTypeDeclaration)
 nmap ge <Action>(ShowErrorDescription)
 nmap gh :action QuickJavaDoc<cr>
+
 nmap gne <Action>(GotoNextError)
 nmap gpe <Action>(GotoPreviousError)
+
+nmap gnm <Action>(MethodDown)
+nmap gpm <Action>(MethodUp)
+
+nmap gnc <Action>(VcsShowNextChangeMarker)
+nmap gpc <Action>(VcsShowPrevChangeMarker)
 
 
 nmap <leader>c <Action>(CallHierarchy)
