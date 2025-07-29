@@ -54,6 +54,17 @@ map mc <A-n>
 map mx <A-x>
 map mp <A-p>
 
+"" Visual Mappings
+
+vmap <A-j> <Action>(EditorSelectWord)
+vmap <A-k> <Action>(EditorUnSelectWord)
+
+
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 "" Movement
 
