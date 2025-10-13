@@ -14,6 +14,7 @@ alias fvi='vi $(fzf --preview "cat {}")'
 alias t='sesh connect $(sesh list | fzf)'
 alias e='yazi'
 alias python='python3'
+alias pip='pip3'
 alias l='eza -l'
 
 # Uncomment the following line to enable command auto-correction.
@@ -24,10 +25,9 @@ ENABLE_CORRECTION="true"
 plugins=(
   git
   asdf
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  you-should-use
-  zsh-bat
+#  zsh-autosuggestions
+  #zsh-syntax-highlighting
+  #zsh-bat
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -90,15 +90,25 @@ bindkey -M viins '^F' sesh-sessions
 
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
+
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
 # JAVA
-export JAVA_HOME=/Users/$USER/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
+export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
 
 
 # Wasmer
-export WASMER_DIR="/Users/fernandoobregon/.wasmer"
+export WASMER_DIR="/Users/fernandooff/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH=$PATH:$HOME/.maestro/bin
