@@ -112,3 +112,8 @@ if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH=$PATH:$HOME/.maestro/bin
+
+#
+# opencode
+export PATH=/Users/fernandooff/.opencode/bin:$PATH
+alias oc='opencode'
