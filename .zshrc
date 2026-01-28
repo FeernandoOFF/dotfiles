@@ -16,6 +16,7 @@ alias e='yazi'
 alias python='python3'
 alias pip='pip3'
 alias l='eza -l'
+alias cl='clear'
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -94,7 +95,8 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
 # JAVA
-export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
+#export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
+export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/openjdk-25.0.2/Contents/Home/
 
 
 # Wasmer
@@ -104,7 +106,10 @@ export WASMER_DIR="/Users/fernandooff/.wasmer"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+#export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+# if command -v pass-cli >/dev/null 2>&1; then
+# pass-cli ssh-agent load && ssh-add -l
+# fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc'; fi
