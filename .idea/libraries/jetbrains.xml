@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jetbrains">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jetbrains/settings.zip!/" />
+      <root url="jar://$PROJECT_DIR$/jetbrains/android-studio-settings.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

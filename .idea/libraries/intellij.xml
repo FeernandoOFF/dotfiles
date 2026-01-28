@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="intellij">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/intellij/settings.zip!/" />
+      <root url="jar://$PROJECT_DIR$/intellij/android-studio-settings.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
