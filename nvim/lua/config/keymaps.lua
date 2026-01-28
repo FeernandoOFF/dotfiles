@@ -69,3 +69,36 @@ vim.keymap.set(
   [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'k' : 'gk']],
   { noremap = true, expr = true }
 )
+
+-- INTELLIJ Mappings
+
+-- vim.keymap.set("n", "<M-p>", "<leader>ff", { desc = "File picker" })
+-- vim.keymap.set("n", "<M-P>", "<cmd>vsplit<cr>", { desc = "Split window right" })
+
+vim.keymap.set("n", "<M-p>", function()
+  LazyVim.pick.open(command, vim.deepcopy(opts))
+end, { noremap = true, silent = true, desc = "Search Files" })
+
+vim.keymap.set("n", "<M-P>", function()
+  Snacks.picker.keymaps()
+end, { noremap = true, silent = true, desc = "Search commands" })
+
+vim.keymap.set("n", "<M-e>", function()
+  Snacks.explorer()
+end, { noremap = true, silent = true, desc = "Open Explorer" })
+
+vim.keymap.set("n", "<M-E>", function()
+  Snacks.explorer({ cwd = LazyVim.root() })
+end, { noremap = true, silent = true, desc = "Open Explorer (Relative)" })
+
+vim.keymap.set("n", "<M-F>", function()
+  Snacks.picker.grep_buffers()
+end, { noremap = true, silent = true, desc = "Find everywhere" })
+
+vim.keymap.set("n", "<M-g>", function()
+  Snacks.lazygit({ cwd = LazyVim.root.git() })
+end, { noremap = true, silent = true, desc = "Open Git" })
+
+vim.keymap.set("n", "<M-t>", function()
+  Util.terminal(nil, { cwd = Util.root() })
+end, { noremap = true, silent = true, desc = "Open Terminal" })

@@ -7,7 +7,6 @@ return {
       -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
         "kotlin",
-
         "tsx",
         "typescript",
         "svelte",
@@ -37,19 +36,22 @@ return {
     "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
+        "gopls",
+
+        "kotlin-lsp",
+        "kotlin-language-server",
+
         "stylua",
         "shellcheck",
-        "gopls",
+
+        "svelte-language-server",
+        "biome",
       },
     },
   },
 
-  -- change trouble config
-  {
-    "folke/trouble.nvim",
-    -- opts will be merged with the parent spec
-    opts = { use_diagnostic_signs = true },
-  },
+  -- change lsptrouble config
+  { "folke/trouble.nvim" },
 
   -- override nvim-cmp and add cmp-emoji
   {
