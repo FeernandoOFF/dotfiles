@@ -36,7 +36,7 @@ map gb <Action>(Back)
 nmap gf <Action>(Forward)
 
 nmap gL <Action>(QuickImplementations)
-nmap gu <Action>(GotoImplementation)
+nmap gu <Action>(ShowUsages)
 nmap gi <Action>(GotoImplementation)
 nmap gI <Action>(GotoSuperMethod)
 nmap gD <Action>(GotoTypeDeclaration)
@@ -53,7 +53,7 @@ nmap gnc <Action>(VcsShowNextChangeMarker)
 nmap gpc <Action>(VcsShowPrevChangeMarker)
 
 
-nmap <leader>c <Action>(CallHierarchy)
+nmap <leader>c <Action>(FileStructurePopup)
 noremap <Leader><Leader> :action SearchEverywhere<CR>
 
 "" Multi cursours
