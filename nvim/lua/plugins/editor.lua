@@ -3,6 +3,7 @@ return {
   -- If you'd rather extend the default config, use the code below instead:
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     opts = function(_, opts)
       -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
@@ -25,7 +26,6 @@ return {
         "javascript",
         "typescript",
         "svelte",
-        "kotlin",
         "go",
       })
     end,
@@ -39,7 +39,6 @@ return {
         "gopls",
 
         "kotlin-lsp",
-        "kotlin-language-server",
 
         "stylua",
         "shellcheck",
@@ -92,23 +91,24 @@ return {
     dependencies = {
       "jose-elias-alvarez/typescript.nvim",
     },
-    config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.sourcekit.setup({
-        capabilities = {
-          workspace = {
-            didChangeWatchedFiles = {
-              dynamicRegistration = true,
-            },
-          },
-        },
-      })
-    end,
     ---@class PluginLspOpts
     opts = {
       ---@type lspconfig.options
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
+        kotlin_lsp = {
+          cmd = { vim.fn.stdpath("data") .. "/mason/bin/kotlin-lsp", "--stdio" },
+          single_file_support = false,
+        },
+        sourcekit = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = true,
+              },
+            },
+          },
+        },
         tsserver = {},
       },
       -- you can do any additional lsp server setup here
