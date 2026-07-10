@@ -54,8 +54,12 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "De-indent selected text" })
 -- vim.keymap.set("n", "<C-f>", workspace.tmux_sessions)
 
 -- Jump lists
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "gu", vim.lsp.buf.references, { desc = "Go to usages" })
+vim.keymap.set("n", "gd", function()
+  require("telescope.builtin").lsp_definitions({ reuse_win = true })
+end, { desc = "Go to definition" })
+vim.keymap.set("n", "gu", function()
+  require("telescope.builtin").lsp_references()
+end, { desc = "Go to usages" })
 vim.keymap.set("n", "gb", "<C-o>", { desc = "Jump to previous location in jumplist" })
 vim.keymap.set("n", "gf", "<C-i>", { desc = "Jump to next location in jumplist" })
 
