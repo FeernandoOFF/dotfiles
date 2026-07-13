@@ -62,6 +62,7 @@ vim.keymap.set("n", "gu", function()
 end, { desc = "Go to usages" })
 vim.keymap.set("n", "gb", "<C-o>", { desc = "Jump to previous location in jumplist" })
 vim.keymap.set("n", "gf", "<C-i>", { desc = "Jump to next location in jumplist" })
+vim.keymap.set("n", "<D-.>", "za", { desc = "Toggle fold" })
 
 -- Set jumplist when moveing more than 3 lines
 vim.keymap.set(
