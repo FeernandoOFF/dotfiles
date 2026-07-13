@@ -5,3 +5,5 @@ background-blur = macos-glass-clear
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 macos-option-as-alt = left
+
+keybind = super+period=text:\x1b[46;9u

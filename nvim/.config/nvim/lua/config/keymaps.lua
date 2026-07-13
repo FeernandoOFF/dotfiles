@@ -47,7 +47,10 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "De-indent selected text" })
 -- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "x", [["_x]])
+vim.keymap.set("n", "X", [["_X]])
+vim.keymap.set({ "n", "v" }, "c", [["_c]])
+vim.keymap.set("n", "C", [["_C]])
 
 -- Tmux workspaces
 -- local workspace = require("workspace")

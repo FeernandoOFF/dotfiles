@@ -1,4 +1,3 @@
-#bin/bash
-brew install neovim && brew install ranger && brew install tmux && asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git &&
-	ln -s ~/dotfiles/nvim ~/.config/nvim/ &&
-	ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
+#!/bin/bash
+brew install neovim ranger tmux mise &&
+	mise use -g node@latest   # nodejs via mise (config symlinks are handled by `make stow`)

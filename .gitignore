@@ -1,1 +1,6 @@
-./raycast/config.json
+# macOS
+.DS_Store
+
+# Raycast — encrypted export, may contain extension secrets; keep local only
+*.rayconfig
+raycast/config.json

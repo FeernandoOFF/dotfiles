@@ -81,12 +81,12 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
 # JAVA
-#export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
-#export JAVA_HOME=/Users/fernandooff/Library/Java/JavaVirtualMachines/openjdk-25.0.2/Contents/Home/
+#export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
+#export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/openjdk-25.0.2/Contents/Home/
 
 
 # AI
-export PATH=/Users/fernandooff/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 
 if command -v pass-cli >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; then
     if ! ssh-add -l >/dev/null 2>&1; then
@@ -96,44 +96,20 @@ fi
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/fernandooff/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 export PATH=$PATH:$HOME/.maestro/bin
 
+# Herdr
 function zz {
-    local current_dir cache_roots cache_root session session_info_dir layout_file session_cwd
-    current_dir="${PWD:A}"
-
-    cache_roots=(
-        "$HOME/Library/Caches/org.Zellij-Contributors.Zellij"
-        "${XDG_CACHE_HOME:-$HOME/.cache}/org.Zellij-Contributors.Zellij"
-    )
-
-    for session in ${(f)"$(zellij list-sessions -s -n 2>/dev/null)"}; do
-        for cache_root in "${cache_roots[@]}"; do
-            for session_info_dir in "$cache_root"/*/session_info(N); do
-                layout_file="$session_info_dir/$session/session-layout.kdl"
-                [[ -f "$layout_file" ]] || continue
-
-                session_cwd=$(awk -F '"' '/^[[:space:]]*cwd "/ { print $2; exit }' "$layout_file")
-                [[ -n "$session_cwd" ]] || continue
-
-                if [[ "$current_dir" == "$session_cwd" ]]; then
-                    zellij attach "$session"
-                    return
-                fi
-            done
-        done
-    done
-
-    local base safe_base hash session_name
-    base="${current_dir:t}"
-    safe_base=${base//[^[:alnum:]_-]/-}
-    safe_base=${safe_base:0:8}
-    [[ -n "$safe_base" ]] || safe_base="z"
-    hash=$(printf '%s' "$current_dir" | shasum | cut -c1-8)
-    session_name="${safe_base}-${hash}"
-    zellij attach -c "$session_name"
+    herdr "$@"
 }
+
+# Pi
+export PATH="$HOME/.local/share/mise/installs/node/24.13.0/bin:$PATH"
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
