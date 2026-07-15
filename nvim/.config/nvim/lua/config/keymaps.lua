@@ -42,6 +42,15 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent selected text" })
 vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "De-indent selected text" })
 
+-- Grep the visual selection across the project
+vim.keymap.set("x", "<leader>g", function()
+  local sel = table.concat(
+    vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() }),
+    "\n"
+  )
+  Snacks.picker.grep({ search = sel, regex = false, live = false, args = { "-i" } })
+end, { desc = "Grep selection (project)" })
+
 -- Paste & Delete?
 -- vim.keymap.set("x", "<leader>p", [["_dP]])
 -- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -74,6 +83,14 @@ vim.keymap.set("n", "gpe", function()
   vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Go to previous error" })
 vim.keymap.set("n", "<D-.>", "za", { desc = "Toggle fold" })
+
+-- Git change (hunk) navigation
+vim.keymap.set("n", "gnc", function()
+  require("gitsigns").nav_hunk("next")
+end, { desc = "Go to next git change" })
+vim.keymap.set("n", "gpc", function()
+  require("gitsigns").nav_hunk("prev")
+end, { desc = "Go to previous git change" })
 
 -- Set jumplist when moveing more than 3 lines
 vim.keymap.set(
