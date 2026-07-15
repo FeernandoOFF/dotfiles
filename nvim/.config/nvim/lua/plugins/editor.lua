@@ -70,6 +70,23 @@ return {
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
       },
+      -- stylua: ignore
+      {
+        "<leader>fr",
+        function() require("telescope.builtin").oldfiles() end,
+        desc = "Recent Files (Telescope)",
+      },
+      -- stylua: ignore
+      {
+        "<leader>fg",
+        function()
+          require("telescope.builtin").live_grep({
+            cwd = vim.fn.expand("%:p:h"),
+            prompt_title = "Grep in " .. vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":~:."),
+          })
+        end,
+        desc = "Grep in current file's folder",
+      },
     },
     -- change some options
     opts = {

@@ -65,6 +65,14 @@ vim.keymap.set("n", "gu", function()
 end, { desc = "Go to usages" })
 vim.keymap.set("n", "gb", "<C-o>", { desc = "Jump to previous location in jumplist" })
 vim.keymap.set("n", "gf", "<C-i>", { desc = "Jump to next location in jumplist" })
+
+-- Diagnostic navigation (errors only)
+vim.keymap.set("n", "gne", function()
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Go to next error" })
+vim.keymap.set("n", "gpe", function()
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Go to previous error" })
 vim.keymap.set("n", "<D-.>", "za", { desc = "Toggle fold" })
 
 -- Set jumplist when moveing more than 3 lines
