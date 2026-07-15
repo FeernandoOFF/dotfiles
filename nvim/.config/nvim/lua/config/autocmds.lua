@@ -38,6 +38,16 @@ vim.api.nvim_create_autocmd("LspNotify", {
   desc = "Fold Kotlin imports when opening a file",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "kotlin",
+  callback = function(event)
+    vim.keymap.set("n", "<leader>ci", "<cmd>KotlinQuickFix<cr>", {
+      buffer = event.buf,
+      desc = "Kotlin quick fix (add missing import)",
+    })
+  end,
+  desc = "Kotlin buffer keymaps (compose preview, quick fix)",
+})
 vim.schedule(function()
   for _, picker in ipairs(Snacks.picker.get({ source = "explorer", tab = false })) do
     picker:close()
