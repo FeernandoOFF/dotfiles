@@ -80,6 +80,52 @@ fi
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
+# Screenshot the connected device/emulator and copy it to the clipboard
+adbshot() {
+    local f="/tmp/adbshot.png"
+
+    # Count connected devices (lines after the header that report "device").
+    local devices count
+    devices=$(adb devices | awk 'NR>1 && $2=="device" {print $1}')
+    count=$(printf '%s\n' "$devices" | grep -c .)
+
+    if [[ "$count" -eq 0 ]]; then
+        echo "❌ No device connected. Plug in a device or start an emulator." >&2
+        return 1
+    elif [[ "$count" -gt 1 ]]; then
+        echo "❌ Multiple devices connected. Pass a serial: adbshot <serial>" >&2
+        printf '%s\n' "$devices" | sed 's/^/   • /' >&2
+        [[ -n "$1" ]] || return 1
+    fi
+
+    local -a serial
+    [[ -n "$1" ]] && serial=(-s "$1")
+
+    # Foldables / multi-display devices expose several physical displays; the
+    # inactive ones capture as black and (without -d) print a warning that
+    # corrupts the PNG. Pick the powered-on display when there is more than one.
+    local did
+    did=$(adb "${serial[@]}" shell dumpsys display 2>/dev/null \
+        | grep 'DisplayDeviceInfo{' | grep 'state ON,' \
+        | grep -oE 'uniqueId="local:[0-9]+"' | grep -oE '[0-9]+' | head -1)
+
+    if [[ -n "$did" ]]; then
+        adb "${serial[@]}" exec-out screencap -d "$did" -p > "$f"
+    else
+        adb "${serial[@]}" exec-out screencap -p > "$f"
+    fi
+
+    # Verify the PNG magic bytes (89 50 4e 47) so a corrupt capture never
+    # silently lands on the clipboard.
+    if [[ "$(head -c4 "$f" 2>/dev/null | xxd -p)" != "89504e47" ]]; then
+        echo "❌ Screenshot capture failed (invalid PNG)." >&2
+        return 1
+    fi
+
+    osascript -e "set the clipboard to (read (POSIX file \"$f\") as «class PNGf»)" \
+        && echo "📋 Screenshot copied to clipboard"
+}
+
 # JAVA
 #export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home/
 #export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/openjdk-25.0.2/Contents/Home/
