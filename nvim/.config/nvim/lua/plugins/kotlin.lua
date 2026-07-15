@@ -30,7 +30,10 @@ return {
         {
           "gd",
           function()
-            require("telescope.builtin").lsp_definitions({ reuse_win = true })
+            -- Android R.<type>.<name> → jump to res/; otherwise LSP definition.
+            if not require("util.android_resource").goto_definition() then
+              require("telescope.builtin").lsp_definitions({ reuse_win = true })
+            end
           end,
           desc = "Go to definition",
           has = "definition",
