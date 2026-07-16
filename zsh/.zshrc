@@ -134,6 +134,99 @@ adbshot() {
 # AI
 export PATH=$HOME/.opencode/bin:$PATH
 
+_ai_opencode_text() {
+    local -a model_args
+    [[ -n "$2" ]] && model_args=(--model "$2")
+
+    opencode run --pure --agent summary --format json "${model_args[@]}" "$1" 2>/dev/null \
+        | jq -rs '[.[] | select(.type == "text") | .part.text? // empty] | join("")'
+}
+
+ai-command-widget() {
+    local request="$BUFFER"
+    local response choices selection
+
+    if [[ -z "${request//[[:space:]]/}" ]]; then
+        zle -M "Type a command request first"
+        return
+    fi
+
+    zle -M "Generating commands..."
+    zle -R
+    response=$(_ai_opencode_text "You generate safe zsh commands for macOS. Do not use tools. Based on the request, return 3 to 5 useful alternatives as compact JSON only, with no markdown or commentary. Use this exact schema: [{\"title\":\"short explanation\",\"content\":\"one-line command\"}]. Do not include tabs or newlines inside values. Never execute anything. Working directory: $PWD. Request: $request" "openai/gpt-5.6-luna")
+    choices=$(print -r -- "$response" | jq -r '
+        if type == "array" then .[] else empty end
+        | select((.title | type) == "string" and (.content | type) == "string")
+        | [(.content | gsub("[\\t\\r\\n]+"; " ")), (.title | gsub("[\\t\\r\\n]+"; " "))]
+        | @tsv
+    ' 2>/dev/null)
+
+    if [[ -z "$choices" ]]; then
+        zle -M "OpenCode did not return any commands"
+        zle reset-prompt
+        return
+    fi
+
+    zle -I
+    selection=$(print -r -- "$choices" | fzf \
+        --height=60% --layout=reverse --border \
+        --delimiter=$'\t' --with-nth=1,2 \
+        --prompt='AI command> ' --header='Enter: insert  Esc: cancel')
+
+    if [[ -n "$selection" ]]; then
+        BUFFER="${selection%%$'\t'*}"
+        CURSOR=${#BUFFER}
+    fi
+    zle reset-prompt
+}
+
+ai-answer-widget() {
+    local question="$BUFFER"
+    local response choices selection encoded answer
+
+    if [[ -z "${question//[[:space:]]/}" ]]; then
+        zle -M "Type a question first"
+        return
+    fi
+
+    zle -M "Asking OpenCode..."
+    zle -R
+    response=$(_ai_opencode_text "Answer the user's question without using tools. Return 2 to 4 useful answer or code-snippet alternatives as compact JSON only, with no markdown outside the JSON. Use this exact schema: [{\"title\":\"short choice label\",\"content\":\"complete answer or snippet\"}]. Working directory context: $PWD. Question: $question")
+    choices=$(print -r -- "$response" | jq -r '
+        if type == "array" then .[] else empty end
+        | select((.title | type) == "string" and (.content | type) == "string")
+        | [(.title | gsub("[\\t\\r\\n]+"; " ")), (.content | @base64)]
+        | @tsv
+    ' 2>/dev/null)
+
+    if [[ -z "$choices" ]]; then
+        zle -M "OpenCode did not return an answer"
+        zle reset-prompt
+        return
+    fi
+
+    zle -I
+    selection=$(print -r -- "$choices" | fzf \
+        --height=80% --layout=reverse --border \
+        --delimiter=$'\t' --with-nth=1 \
+        --preview='printf %s {2} | base64 --decode' \
+        --preview-window='right,65%,wrap' \
+        --prompt='AI answer> ' --header='Enter: copy  Esc: cancel')
+
+    if [[ -n "$selection" ]]; then
+        encoded="${selection#*$'\t'}"
+        answer=$(printf '%s' "$encoded" | base64 --decode)
+        printf '%s' "$answer" | pbcopy
+        zle -M "AI answer copied to clipboard"
+    fi
+    zle reset-prompt
+}
+
+zle -N ai-command-widget
+zle -N ai-answer-widget
+bindkey '^G' ai-command-widget
+bindkey '^[a' ai-answer-widget
+
 if command -v pass-cli >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; then
     if ! ssh-add -l >/dev/null 2>&1; then
         pass-cli ssh-agent load >/dev/null 2>&1
