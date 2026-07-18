@@ -19,6 +19,9 @@ fi
 
 plugins=(
   git
+  eza
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 
