@@ -9,8 +9,12 @@ source $ZSH/oh-my-zsh.sh
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ -r "$HOME/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$HOME/powerlevel10k/powerlevel10k.zsh-theme"
+elif [[ -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
+fi
+[[ -r "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
 
 plugins=(
@@ -73,7 +77,14 @@ fi
 
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf
+if [[ -d "$HOME/.fzf/bin" && ":$PATH:" != *":$HOME/.fzf/bin:"* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
 
 # Android CLI
 
@@ -250,5 +261,7 @@ function zz {
 export PATH="$HOME/.local/share/mise/installs/node/24.13.0/bin:$PATH"
 
 # >>> railway initialize >>>
-source "$HOME/.railway/env"
+if [[ -r "$HOME/.railway/env" ]]; then
+  source "$HOME/.railway/env"
+fi
 # <<< railway initialize <<<
