@@ -265,3 +265,6 @@ if [[ -r "$HOME/.railway/env" ]]; then
   source "$HOME/.railway/env"
 fi
 # <<< railway initialize <<<
+if command -v tv >/dev/null 2>&1; then
+  eval "$(tv init zsh)"
+fi
