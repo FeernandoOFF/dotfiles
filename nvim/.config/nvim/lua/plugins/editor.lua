@@ -78,7 +78,7 @@ return {
       },
       -- stylua: ignore
       {
-        "<leader>fg",
+        "<leader>sF",
         function()
           require("telescope.builtin").live_grep({
             cwd = vim.fn.expand("%:p:h"),
