@@ -9,12 +9,10 @@ source $ZSH/oh-my-zsh.sh
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-if [[ -r "$HOME/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "$HOME/powerlevel10k/powerlevel10k.zsh-theme"
-elif [[ -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+
+if [[ -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
   source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
 fi
-[[ -r "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
 
 plugins=(
