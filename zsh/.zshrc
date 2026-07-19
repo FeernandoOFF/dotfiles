@@ -20,6 +20,7 @@ plugins=(
   eza
   zsh-autosuggestions
   zsh-syntax-highlighting
+  vi-mode
 )
 
 
