@@ -72,7 +72,7 @@ onboarding = false
 # goto = "prefix+g"
 # new_workspace = "prefix+shift+n"
 # new_worktree = "prefix+shift+g"
-# open_worktree = ""    # optional, unset by default
+open_worktree = "prefix+shift+o" # optional, unset by default
 # remove_worktree = ""  # optional, unset by default; opens confirmation
 # rename_workspace = "prefix+shift+w"
 # close_workspace = "prefix+shift+d"
@@ -158,6 +158,13 @@ key = "alt+ctrl+shift+t"
 type = "shell"
 command = '''sh -lc 'current=$(herdr pane current --current); ws=$(printf "%s" "$current" | jq -r ".result.pane.workspace_id"); original_tab=$(printf "%s" "$current" | jq -r ".result.pane.tab_id"); create_tab() { herdr tab create --workspace "$ws" --label "$1" --no-focus | jq -r ".result.tab.tab_id // .result.tab_id // .result.tabs[0].tab_id"; }; first_pane() { herdr pane list --workspace "$ws" | jq -r --arg tab "$1" "[.result.panes[] | select(.tab_id == \$tab)][0].pane_id // empty"; }; ai_tab=$(create_tab AI); git_tab=$(create_tab Git); create_tab Terminal >/dev/null; ai_pane=$(first_pane "$ai_tab"); git_pane=$(first_pane "$git_tab"); [ -n "$ai_pane" ] && herdr pane run "$ai_pane" opencode; [ -n "$git_pane" ] && herdr pane run "$git_pane" lazygit; [ -n "$original_tab" ] && herdr tab focus "$original_tab"' '''
 description = "apply AI/Git/Terminal tabs to current workspace"
+[[keys.command]]
+key = "alt+g"
+type = "popup"
+command = "lazygit"
+description = "run lazygit"
+width = "80%"
+height = "80%"
 
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
@@ -167,7 +174,7 @@ description = "apply AI/Git/Terminal tabs to current workspace"
 # agents = ""     # e.g. "alt" makes alt+1..9 focus agent rows directly
 
 # [worktrees]
-# directory = "~/.herdr/worktrees"
+directory = "~/.herdr/worktrees"
 
 [ui]
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
