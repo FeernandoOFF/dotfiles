@@ -14,6 +14,12 @@ if [[ -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" 
   source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
 fi
 
+bindkey -v
+export KEYTIMEOUT=1
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 plugins=(
   git
@@ -89,7 +95,6 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # Android CLI
-
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
