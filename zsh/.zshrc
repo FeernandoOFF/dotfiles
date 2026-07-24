@@ -1,19 +1,14 @@
 # ---- ZSH Init configuration ----
 
 export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""            # prompt is handled by oh-my-posh, not an omz theme
 source $ZSH/oh-my-zsh.sh
 
 
-# Powerlevel10k
+# ---- Prompt: oh-my-posh ----
+eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/config.json")"
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-if [[ -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
-fi
-
+# Vim mode
 bindkey -v
 export KEYTIMEOUT=1
 

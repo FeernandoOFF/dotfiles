@@ -27,7 +27,7 @@ make stow
 The rest are run locally after the repo is cloned, in this order:
 
 ```sh
-~/dotfiles/scripts/zsh.sh            # oh-my-zsh, powerlevel10k, syntax highlighting
+~/dotfiles/scripts/zsh.sh            # oh-my-zsh, oh-my-posh prompt, syntax highlighting
 ~/dotfiles/scripts/terminal_apps.sh  # neovim, ghostty, yazi, lazygit, lazydocker, fzf, herdr
 ~/dotfiles/scripts/tools.sh          # mise runtimes (node/python/go/bun), pnpm, wasmer, xcodes, zoxide
 ~/dotfiles/scripts/mac_defaults.sh   # macOS defaults (dock, finder) + nerd fonts
