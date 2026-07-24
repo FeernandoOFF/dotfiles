@@ -1,7 +1,7 @@
 # Dotfiles managed with GNU Stow.
 # Each package below mirrors its path relative to $HOME.
 
-PKGS = zsh tmux nvim zellij ghostty lazygit herdr ideavim
+PKGS = zsh nvim ghostty lazygit herdr ideavim
 
 .PHONY: stow unstow restow list
 
