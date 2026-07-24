@@ -1,5 +1,5 @@
-#bin/bash
-brew install --cask raycast &&
-	brew install --cask arc &&
-	brew install --cask amethyst &&
-	brew install --cask karabiner-elements
+#!/bin/bash
+# GUI apps that affect the OS workflow.
+brew install --cask raycast && brew install --cask zen && \
+brew install --cask karabiner-elements && brew install protonpass/tap/pass-cli && \
+brew install --cask homerow && brew install --cask jordanbaird-ice

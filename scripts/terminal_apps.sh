@@ -1,3 +1,6 @@
 #!/bin/bash
-brew install neovim mise television fd ripgrep bat &&
-  mise use -g node@latest # nodejs via mise (config symlinks are handled by `make stow`)
+# Terminal editors & apps. Config symlinks are handled by `make stow`.
+brew install neovim && brew install --cask ghostty && brew install yazi && \
+brew install lazygit && brew install lazydocker && brew install fzf && \
+brew install herdr && \
+brew install television fd ripgrep bat   # deps used by nvim / fzf tooling
