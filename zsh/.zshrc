@@ -37,23 +37,19 @@ export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 
 
-# ---- Custom Configuiration ----
+# ---- Aliases ----
 
-# Aliases 
-alias gw='git switch'
 alias lz='lazygit'
 alias vi='nvim'
-alias f='fzf --preview "cat {}"'
-alias fvi='vi $(fzf --preview "cat {}")'
-alias t='sesh connect $(sesh list | fzf)'
 alias e='yazi'
-alias python='python3'
-alias pip='pip3'
-alias l='eza -l'
-alias cl='clear'
+
 alias oc='opencode'
 alias cc='claude'
 
+alias gw='git switch'
+alias f='fzf --preview "cat {}"'
+alias fvi='vi $(fzf --preview "cat {}")'
+alias cl='clear'
 
 
 # Preferred editor for local and remote sessions
@@ -63,6 +59,8 @@ alias cc='claude'
    export EDITOR='nvim'
  fi
 
+
+# ---- Tooling ----
 
 # eza
 if command -v eza &>/dev/null; then
@@ -76,25 +74,32 @@ eval "$(mise activate zsh)"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # zoxide
-
 eval "$(zoxide init zsh)"
-
 if command -v z &>/dev/null; then
     alias cd='z'
 fi
-
 
 
 # fzf
 if [[ -d "$HOME/.fzf/bin" && ":$PATH:" != *":$HOME/.fzf/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
 fi
-
 if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
 
-# Android CLI
+
+export PATH=$PATH:$HOME/.maestro/bin
+
+# Herdr
+function zz {
+    herdr "$@"
+}
+
+# Pi
+export PATH="$HOME/.local/share/mise/installs/node/24.13.0/bin:$PATH"
+
+# Android development
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/bin"
 
@@ -249,29 +254,4 @@ if command -v pass-cli >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; th
     if ! ssh-add -l >/dev/null 2>&1; then
         pass-cli ssh-agent load >/dev/null 2>&1
     fi
-fi
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-export PATH=$PATH:$HOME/.maestro/bin
-
-# Herdr
-function zz {
-    herdr "$@"
-}
-
-# Pi
-export PATH="$HOME/.local/share/mise/installs/node/24.13.0/bin:$PATH"
-
-# >>> railway initialize >>>
-if [[ -r "$HOME/.railway/env" ]]; then
-  source "$HOME/.railway/env"
-fi
-# <<< railway initialize <<<
-if command -v tv >/dev/null 2>&1; then
-  eval "$(tv init zsh)"
 fi
