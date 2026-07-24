@@ -173,7 +173,7 @@ height = "80%"
 # workspaces = "" # e.g. "ctrl+shift" makes ctrl+shift+1..9 switch workspaces directly
 # agents = ""     # e.g. "alt" makes alt+1..9 focus agent rows directly
 
-# [worktrees]
+[worktrees]
 directory = "~/.herdr/worktrees"
 
 [ui]
