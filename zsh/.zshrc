@@ -2,24 +2,38 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""            # prompt is handled by oh-my-posh, not an omz theme
+plugins=(
+  git
+  eza
+  zsh-autosuggestions
+  zsh-vi-mode
+  zsh-syntax-highlighting
+)
+
+function zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+
+function zvm_after_init() {
+  zvm_bindkey viins '^[[1;5D' backward-word
+  zvm_bindkey viins '^[[1;5C' forward-word
+  zvm_bindkey viins '^[b' backward-word
+  zvm_bindkey viins '^[f' forward-word
+  zvm_bindkey viins '^A' beginning-of-line
+  zvm_bindkey viins '^E' end-of-line
+  zvm_bindkey viins '^[[3~' delete-char
+  zvm_bindkey viins '^[[3;5~' kill-word
+  zvm_bindkey viins '^[^?' backward-kill-word
+  zvm_bindkey viins '^W' backward-kill-word
+  zvm_bindkey viins '^U' backward-kill-line
+}
+
+ZVM_INIT_MODE=sourcing
 source $ZSH/oh-my-zsh.sh
 
 
 # ---- Prompt: oh-my-posh ----
 eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/config.yaml")"
-
-# Vim mode. The oh-my-posh `vimode` segment auto-registers a zle-keymap-select
-# hook and re-renders the prompt on each mode change — only `bindkey -v` is needed.
-bindkey -v
-export KEYTIMEOUT=1
-
-
-plugins=(
-  git
-  eza
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
 
 
 # ---- Platform configuration ----
