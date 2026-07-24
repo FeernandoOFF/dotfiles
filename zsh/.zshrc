@@ -6,14 +6,12 @@ source $ZSH/oh-my-zsh.sh
 
 
 # ---- Prompt: oh-my-posh ----
-eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/config.json")"
+eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/config.yaml")"
 
-# Vim mode
+# Vim mode. The oh-my-posh `vimode` segment auto-registers a zle-keymap-select
+# hook and re-renders the prompt on each mode change — only `bindkey -v` is needed.
 bindkey -v
 export KEYTIMEOUT=1
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 plugins=(
@@ -21,7 +19,6 @@ plugins=(
   eza
   zsh-autosuggestions
   zsh-syntax-highlighting
-  vi-mode
 )
 
 
