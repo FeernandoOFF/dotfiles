@@ -171,9 +171,32 @@ _ai_opencode_text() {
         | jq -rs '[.[] | select(.type == "text") | .part.text? // empty] | join("")'
 }
 
+# Shared choice generators reused by the ZLE widgets and command_not_found_handler.
+_ai_command_choices() {
+    local request="$1" response
+    response=$(_ai_opencode_text "You generate safe zsh commands for macOS. Do not use tools. Based on the request, return 3 to 5 useful alternatives as compact JSON only, with no markdown or commentary. Use this exact schema: [{\"title\":\"short explanation\",\"content\":\"one-line command\"}]. Do not include tabs or newlines inside values. Never execute anything. Working directory: $PWD. Request: $request" "openai/gpt-5.6-luna")
+    print -r -- "$response" | jq -r '
+        if type == "array" then .[] else empty end
+        | select((.title | type) == "string" and (.content | type) == "string")
+        | [(.content | gsub("[\\t\\r\\n]+"; " ")), (.title | gsub("[\\t\\r\\n]+"; " "))]
+        | @tsv
+    ' 2>/dev/null
+}
+
+_ai_answer_choices() {
+    local question="$1" response
+    response=$(_ai_opencode_text "Answer the user's question without using tools. Return 2 to 4 useful answer or code-snippet alternatives as compact JSON only, with no markdown outside the JSON. Use this exact schema: [{\"title\":\"short choice label\",\"content\":\"complete answer or snippet\"}]. Working directory context: $PWD. Question: $question")
+    print -r -- "$response" | jq -r '
+        if type == "array" then .[] else empty end
+        | select((.title | type) == "string" and (.content | type) == "string")
+        | [(.title | gsub("[\\t\\r\\n]+"; " ")), (.content | @base64)]
+        | @tsv
+    ' 2>/dev/null
+}
+
 ai-command-widget() {
     local request="$BUFFER"
-    local response choices selection
+    local choices selection
 
     if [[ -z "${request//[[:space:]]/}" ]]; then
         zle -M "Type a command request first"
@@ -182,13 +205,7 @@ ai-command-widget() {
 
     zle -M "Generating commands..."
     zle -R
-    response=$(_ai_opencode_text "You generate safe zsh commands for macOS. Do not use tools. Based on the request, return 3 to 5 useful alternatives as compact JSON only, with no markdown or commentary. Use this exact schema: [{\"title\":\"short explanation\",\"content\":\"one-line command\"}]. Do not include tabs or newlines inside values. Never execute anything. Working directory: $PWD. Request: $request" "openai/gpt-5.6-luna")
-    choices=$(print -r -- "$response" | jq -r '
-        if type == "array" then .[] else empty end
-        | select((.title | type) == "string" and (.content | type) == "string")
-        | [(.content | gsub("[\\t\\r\\n]+"; " ")), (.title | gsub("[\\t\\r\\n]+"; " "))]
-        | @tsv
-    ' 2>/dev/null)
+    choices=$(_ai_command_choices "$request")
 
     if [[ -z "$choices" ]]; then
         zle -M "OpenCode did not return any commands"
@@ -211,7 +228,7 @@ ai-command-widget() {
 
 ai-answer-widget() {
     local question="$BUFFER"
-    local response choices selection encoded answer
+    local choices selection encoded answer
 
     if [[ -z "${question//[[:space:]]/}" ]]; then
         zle -M "Type a question first"
@@ -220,13 +237,7 @@ ai-answer-widget() {
 
     zle -M "Asking OpenCode..."
     zle -R
-    response=$(_ai_opencode_text "Answer the user's question without using tools. Return 2 to 4 useful answer or code-snippet alternatives as compact JSON only, with no markdown outside the JSON. Use this exact schema: [{\"title\":\"short choice label\",\"content\":\"complete answer or snippet\"}]. Working directory context: $PWD. Question: $question")
-    choices=$(print -r -- "$response" | jq -r '
-        if type == "array" then .[] else empty end
-        | select((.title | type) == "string" and (.content | type) == "string")
-        | [(.title | gsub("[\\t\\r\\n]+"; " ")), (.content | @base64)]
-        | @tsv
-    ' 2>/dev/null)
+    choices=$(_ai_answer_choices "$question")
 
     if [[ -z "$choices" ]]; then
         zle -M "OpenCode did not return an answer"
@@ -240,13 +251,13 @@ ai-answer-widget() {
         --delimiter=$'\t' --with-nth=1 \
         --preview='printf %s {2} | base64 --decode' \
         --preview-window='right,65%,wrap' \
-        --prompt='AI answer> ' --header='Enter: copy  Esc: cancel')
+        --prompt='AI answer> ' --header='Enter: insert  Esc: cancel')
 
     if [[ -n "$selection" ]]; then
         encoded="${selection#*$'\t'}"
         answer=$(printf '%s' "$encoded" | base64 --decode)
-        printf '%s' "$answer" | pbcopy
-        zle -M "AI answer copied to clipboard"
+        BUFFER="$answer"
+        CURSOR=${#BUFFER}
     fi
     zle reset-prompt
 }
@@ -254,7 +265,80 @@ ai-answer-widget() {
 zle -N ai-command-widget
 zle -N ai-answer-widget
 bindkey '^G' ai-command-widget
+bindkey '^[g' ai-command-widget
 bindkey '^[a' ai-answer-widget
+
+# Conservative check: does an unrecognized line look like a natural-language question?
+_ai_looks_like_question() {
+    local line="$1"
+    [[ "$line" == *[[:space:]]* ]] || return 1
+    [[ "$line" == *\? ]] && return 0
+    local first="${line%%[[:space:]]*}"
+    case "${first:l}" in
+        how|what|why|where|when|who|which|whats|\
+        can|could|should|would|will|is|are|do|does|did|\
+        list|show|find|explain|create|make|convert|install|remove|delete|generate|write|search)
+            return 0 ;;
+    esac
+    return 1
+}
+
+_ai_notfound_commands() {
+    local choices selection
+    print -u2 "Generating commands..."
+    choices=$(_ai_command_choices "$1")
+    if [[ -z "$choices" ]]; then
+        print -u2 "OpenCode did not return any commands"
+        return
+    fi
+    selection=$(print -r -- "$choices" | fzf \
+        --height=60% --layout=reverse --border \
+        --delimiter=$'\t' --with-nth=1,2 \
+        --prompt='AI command> ' --header='Enter: load  Esc: cancel')
+    [[ -n "$selection" ]] && print -z "${selection%%$'\t'*}"
+}
+
+_ai_notfound_ask() {
+    local choices selection encoded answer
+    print -u2 "Asking OpenCode..."
+    choices=$(_ai_answer_choices "$1")
+    if [[ -z "$choices" ]]; then
+        print -u2 "OpenCode did not return an answer"
+        return
+    fi
+    selection=$(print -r -- "$choices" | fzf \
+        --height=80% --layout=reverse --border \
+        --delimiter=$'\t' --with-nth=1 \
+        --preview='printf %s {2} | base64 --decode' \
+        --preview-window='right,65%,wrap' \
+        --prompt='AI answer> ' --header='Enter: insert  Esc: cancel')
+    if [[ -n "$selection" ]]; then
+        encoded="${selection#*$'\t'}"
+        answer=$(printf '%s' "$encoded" | base64 --decode)
+        print -z "$answer"
+    fi
+}
+
+# Pass unmatched glob patterns through literally instead of aborting the line, so
+# questions ending in '?' reach command_not_found_handler rather than "no matches found".
+setopt nonomatch
+
+command_not_found_handler() {
+    local line="$*"
+    if [[ ! -o interactive ]] || ! command -v opencode >/dev/null 2>&1 || ! _ai_looks_like_question "$line"; then
+        print -u2 "zsh: command not found: $1"
+        return 127
+    fi
+    print -u2 -P "%F{yellow}zsh:%f '$line' — looks like a question  %F{cyan}[any] commands  [a] ask  [q] ignore%f"
+    local key
+    read -k 1 -s key
+    case "$key" in
+        a|A) _ai_notfound_ask "$line" ;;
+        q|Q|$'\n'|$'\r'|$'\e') : ;;
+        *) _ai_notfound_commands "$line" ;;
+    esac
+    return 127
+}
 
 if command -v pass-cli >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; then
     if ! ssh-add -l >/dev/null 2>&1; then
