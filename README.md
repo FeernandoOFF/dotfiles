@@ -59,9 +59,13 @@ Add or remove a package by editing `PKGS` in the `Makefile`.
 | `ghostty` | `~/.config/ghostty/config`  |
 | `lazygit` | `~/.config/lazygit/config.yml` |
 | `ideavim` | `~/.ideavimrc`              |
+| `pi`      | `~/.pi/agent/` (settings and MCP configuration) |
 
 Apps that keep runtime files next to their config (`herdr`, `ghostty`) are linked at
 the file level, so logs/sockets/backups are left untouched.
+
+Pi is also linked at the file level. Authentication, environment files, caches,
+sessions, extensions, and downloaded packages are intentionally kept local.
 
 ## Manual imports (not symlink-able)
 

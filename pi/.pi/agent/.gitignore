@@ -1,0 +1,7 @@
+# Local Pi state and credentials. Do not store these in dotfiles.
+.env
+auth.json
+mcp-cache.json
+sessions/
+git/
+npm/

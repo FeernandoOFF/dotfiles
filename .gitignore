@@ -4,3 +4,15 @@
 # Raycast — encrypted export, may contain extension secrets; keep local only
 *.rayconfig
 raycast/config.json
+
+# Herdr runtime files; keep only config.toml in git
+herdr/.config/herdr/.plugins.lock
+herdr/.config/herdr/*.log
+herdr/.config/herdr/*.sock
+herdr/.config/herdr/session.json
+
+
+# PI MCP & Models-store
+
+/pi/.pi/agent/mcp.json
+/pi/.pi/agent/models-store.json
