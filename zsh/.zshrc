@@ -47,7 +47,7 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 
 alias lz='lazygit'
 alias vi='nvim'
-alias e='yazi'
+alias e='spf'
 
 alias oc='opencode'
 alias cc='claude'
