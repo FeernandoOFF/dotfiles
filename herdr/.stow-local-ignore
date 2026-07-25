@@ -1,0 +1,6 @@
+# Runtime files created by herdr next to config.toml.
+# Keep them local in ~/.config/herdr; only config.toml is stow-managed.
+\.config/herdr/\.plugins\.lock$
+\.config/herdr/.*\.log$
+\.config/herdr/.*\.sock$
+\.config/herdr/session\.json$
