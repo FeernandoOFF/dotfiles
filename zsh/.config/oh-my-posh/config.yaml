@@ -25,10 +25,6 @@ blocks:
     - type: prompt
       alignment: left
       segments:
-        - type: session
-          style: plain
-          foreground: p:red
-          template: '{{ if .SSHSession }} {{ .UserName }}@{{ .HostName }} {{ end }}'
         - type: path
           style: diamond
           leading_diamond: ""
@@ -42,6 +38,12 @@ blocks:
             home_icon: "~"
             folder_icon: ""
             folder_separator_icon: '  '
+        - type: session
+          style: powerline
+          powerline_symbol: ""
+          foreground: p:base
+          background: p:lavender
+          template: '{{ if .SSHSession }}  {{ splitList "." .HostName | first }} {{ end }}'
         - type: git
           style: powerline
           powerline_symbol: ""
