@@ -25,6 +25,10 @@ blocks:
     - type: prompt
       alignment: left
       segments:
+        - type: session
+          style: plain
+          foreground: p:red
+          template: '{{ if .SSHSession }} {{ .UserName }}@{{ .HostName }} {{ end }}'
         - type: path
           style: diamond
           leading_diamond: ""
