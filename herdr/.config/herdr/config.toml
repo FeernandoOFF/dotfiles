@@ -60,7 +60,7 @@ onboarding = false
 # Named punctuation such as minus, comma, ampersand, plus, and backtick is also accepted.
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
-# prefix = "ctrl+b"
+prefix = "ctrl+s"
 
 # Prefix-mode actions
 # help = "prefix+?"
@@ -110,7 +110,7 @@ focus_pane_left = ["prefix+h", "ctrl+alt+h"]
 focus_pane_down = ["prefix+j", "ctrl+alt+j", "alt+j"]
 focus_pane_up = ["prefix+k", "ctrl+alt+k", "alt+k"]
 focus_pane_right = ["prefix+l", "ctrl+alt+l"]
-goto = ["prefix+g", "alt+p"]
+goto = ["prefix+s", "alt+p"]
 focus_agent = "alt+shift+1..9"
 previous_tab = ["prefix+p", "ctrl+alt+["]
 next_tab = ["prefix+n", "ctrl+alt+]"]
